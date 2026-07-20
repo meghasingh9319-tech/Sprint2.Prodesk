@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cash-Flow — Personal Ledger</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="app">
+
+    <aside class="sidebar">
+
+      <div class="brand">
+        <span class="brand-mark">₵</span>
+
+        <div class="brand-text">
+          <span class="brand-name">Cash-Flow</span>
+          <span class="brand-sub">Sprint 02 · Prodesk IT</span>
+        </div>
+      </div>
+
+      <nav class="side-nav">
+        <div class="side-nav-item active">
+          <span class="dot"></span>
+          Ledger
+        </div>
+
+        <div class="side-nav-item">
+          <span class="dot"></span>
+          Breakdown
+        </div>
+      </nav>
+
+      <div class="side-stats">
+
+        <div class="side-stat">
+          <span class="side-stat-label">Total Salary</span>
+          <span class="side-stat-value mono" id="statSalary">₹0</span>
+        </div>
+
+        <div class="side-stat">
+          <span class="side-stat-label">Total Expenses</span>
+          <span class="side-stat-value mono" id="statExpenses">₹0</span>
+        </div>
+
+        <div class="side-stat">
+          <span class="side-stat-label">Entries Logged</span>
+          <span class="side-stat-value mono" id="statCount">0</span>
+        </div>
+
+      </div>
+
+      <div class="side-footer">
+        <p>
+          Vanilla JS · No frameworks<br>
+          Data persists via <code>localStorage</code>
+        </p>
+      </div>
+
+    </aside>
+
+    <main class="main">
+
+      <section class="hero">
+
+        <div class="hero-left">
+          <span class="eyebrow">Remaining Balance</span>
+
+          <h1 class="balance mono" id="balanceDisplay">
+            ₹0
+          </h1>
+
+          <p class="hero-caption" id="balanceCaption">
+            Set your salary to begin tracking.
+          </p>
+        </div>
+
+        <div class="hero-right">
+          <div class="chart-card">
+            <canvas id="expenseChart" height="220"></canvas>
+            <div class="chart-empty" id="chartEmpty">
+              No expenses yet
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="panels">
+
+        <form class="panel" id="salaryForm" novalidate>
+
+          <div class="panel-head">
+            <h2>Salary</h2>
+            <span class="panel-tag">Step 01</span>
+          </div>
+
+          <label class="field">
+            <span class="field-label">Total Salary (₹)</span>
+
+            <input
+              type="number"
+              id="salaryInput"
+              placeholder="e.g. 45000"
+              min="0"
+              step="1"
+              inputmode="numeric">
+          </label>
+
+          <button type="submit" class="btn btn-primary">
+            Set Salary
+          </button>
+
+          <p class="field-error" id="salaryError"></p>
+
+        </form>
+
+        <form class="panel" id="expenseForm" novalidate>
+
+          <div class="panel-head">
+            <h2>Log Expense</h2>
+            <span class="panel-tag">Step 02</span>
+          </div>
+
+          <label class="field">
+            <span class="field-label">Expense Name</span>
+
+            <input
+              type="text"
+              id="expenseName"
+              placeholder="e.g. Groceries"
+              autocomplete="off">
+          </label>
+
+          <label class="field">
+            <span class="field-label">Expense Amount (₹)</span>
+
+            <input
+              type="number"
+              id="expenseAmount"
+              placeholder="e.g. 1200"
+              min="0"
+              step="1"
+              inputmode="numeric">
+          </label>
+
+          <button type="submit" class="btn btn-accent">
+            Add Expense
+          </button>
+
+          <p class="field-error" id="expenseError"></p>
+
+        </form>
+
+      </section>
+
+      <section class="ledger-section">
+
+        <div class="ledger-head">
+          <h2>Transaction Ledger</h2>
+          <span class="ledger-count" id="ledgerCount">
+            0 entries
+          </span>
+        </div>
+
+        <div class="ledger-table-wrap">
+
+          <table class="ledger-table">
+
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Expense</th>
+                <th class="align-right">Amount</th>
+                <th class="align-right">Logged</th>
+                <th class="align-right"></th>
+              </tr>
+            </thead>
+
+            <tbody id="ledgerBody"></tbody>
+
+          </table>
+
+          <div class="ledger-empty" id="ledgerEmpty">
+            <p>No expenses logged yet.</p>
+            <span>Add one above — it'll show up here instantly.</span>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
